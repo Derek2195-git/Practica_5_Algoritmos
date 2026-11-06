@@ -1,0 +1,22 @@
+.carta-placeholder { -fx-background-color: #2a2438; -fx-background-radius: 6; -fx-border-color: #6b5b95; -fx-border-radius: 6; }
+.carta-principal .image-view { -fx-effect: dropshadow(gaussian, rgba(255,200,60,0.7), 28, 0.3, 0, 0); }
+.carta-control { -fx-opacity: 0.7; }
+.carta-control:hover { -fx-opacity: 1; -fx-scale-x: 1.05; -fx-scale-y: 1.05; }
+.carta-nombre { -fx-text-fill: #f2e6c9; }
+.carta-dato { -fx-text-fill: #e0b84c; }
+
+.descripcion-carta { -fx-background-color: #1d1a2b; -fx-background-radius: 10; -fx-border-color: #c9a227; -fx-border-radius: 10; }
+.descripcion-nombre { -fx-text-fill: #f5f0e1; -fx-font-size: 22px; -fx-font-weight: bold; }
+.descripcion-rareza { -fx-text-fill: #c9a227; -fx-font-size: 12px; }
+.descripcion-tipo { -fx-text-fill: #b8b2d0; }
+.descripcion-texto { -fx-text-fill: #d8d4e8; -fx-font-size: 14px; }
+.descripcion-scroll, .descripcion-scroll > .viewport { -fx-background-color: transparent; }
+.stat { -fx-text-fill: #f5f0e1; -fx-font-weight: bold; -fx-font-size: 15px; }
+.chip { -fx-padding: 2 10; -fx-background-radius: 10; -fx-background-color: #3a3550; -fx-text-fill: white; }
+.atributo-light  { -fx-background-color: #b8962e; }
+.atributo-dark   { -fx-background-color: #5b2a86; }
+.atributo-earth  { -fx-background-color: #7a5a2e; }
+.atributo-water  { -fx-background-color: #1e6fb8; }
+.atributo-fire   { -fx-background-color: #c4412b; }
+.atributo-wind   { -fx-background-color: #2f9e5b; }
+.atributo-divine { -fx-background-color: #a68a1f; }
