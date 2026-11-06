@@ -9,22 +9,22 @@ public class LectorCSV {
     private final int NOMBRE = 0, ATRIBUTO = 1, NIVEL = 2, TIPO = 3, ATK = 4, DEF = 5,
                 rareza = 6, DESCRIPCION = 7, IMAGEN = 9;
 
-    public CartaYGO[] leerCartas(String ruta) throws IOException {
+    public ArrayList<CartaYGO> leerCartas(String ruta) throws IOException {
         ArrayList<String[]> filas = leerFilas(ruta);
         ArrayList<CartaYGO> cartas = new ArrayList<>();
         for (int i = 1; i < filas.size(); i++) {
             String[] celdas = filas.get(i);
             if (celdas.length != COLUMNAS) {
-                System.out.println("Fila " + i + " omitida: " + celdas.length + " columnas");
+                System.err.println("Fila " + i + " omitida: " + celdas.length + " columnas en vez de " + COLUMNAS);
                 continue;
             }
             try {
                 cartas.add(filaACarta(celdas));
             } catch (NumberFormatException e) {
-                System.out.println("Error al abrir el CSV: " + e.getMessage());
+                System.err.println("Fila " + i + " omitida (" + celdas[NOMBRE] + "): " + e.getMessage());
             }
         }
-        return cartas.toArray(new CartaYGO[0]);
+        return cartas;
     }
 
     private ArrayList<String[]> leerFilas(String ruta) throws IOException {

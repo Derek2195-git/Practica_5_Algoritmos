@@ -1,7 +1,5 @@
 package com.example.practica5algoritmos.Modelo;
 
-import java.util.Comparator;
-
 public class CartaYGO implements Comparable<CartaYGO> {
     private String nombre;
     private String atributo;
@@ -86,12 +84,12 @@ public class CartaYGO implements Comparable<CartaYGO> {
         return "Nivel " + nivel;
     }
 
-    private int compararAtaque(CartaYGO carta, CartaYGO o) {
+    public static int compararAtaque(CartaYGO carta, CartaYGO o) {
         int resultado = Integer.compare(carta.getAtaque(), o.getAtaque());
         return resultado != 0 ? resultado : carta.compareTo(o);   // empate: por nombre
     }
 
-    public int compararDefensa(CartaYGO carta, CartaYGO o) {
+    public static int compararDefensa(CartaYGO carta, CartaYGO o) {
         int resultado = Integer.compare(carta.getDefensa(), o.getDefensa());
         return resultado != 0 ? resultado : carta.compareTo(o);
     }

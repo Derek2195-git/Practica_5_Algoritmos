@@ -120,7 +120,7 @@ public class ListaDobleCircular<T extends Comparable<? super T>> {
         NodoDoble<T> r = inicio;
         T dato = null;
 
-        while(!r.getSiguiente().equals(inicio)) {
+        while (!r.getSiguiente().equals(inicio)) {
             if (r.getSiguiente().getInfo().equals(datoABuscar)) {
                 NodoDoble<T> nodoAEliminar = r.getSiguiente();
                 dato = nodoAEliminar.getInfo();
@@ -148,10 +148,10 @@ public class ListaDobleCircular<T extends Comparable<? super T>> {
             nodo.getSiguiente().setAnt(nodo.getAnt());
             return datoABuscar;
 
-        }
-        else if (nodo.getSiguiente() == inicio) return null;
+        } else if (nodo.getSiguiente() == inicio) return null;
         else return eliminarX(nodo.getSiguiente(), datoABuscar);
     }
+
     public T eliminarXRecursivo(T datoABuscar) {
         if (inicio == null) return null;
         else return eliminarX(inicio, datoABuscar);
@@ -162,7 +162,7 @@ public class ListaDobleCircular<T extends Comparable<? super T>> {
         if (inicio.getInfo().equals(datoABuscar)) return true;
 
         NodoDoble<T> r = inicio;
-        while(r.getSiguiente() != inicio) {
+        while (r.getSiguiente() != inicio) {
             if (r.getSiguiente().getInfo().equals(datoABuscar)) return true;
             r = r.getSiguiente();
         }
@@ -184,7 +184,7 @@ public class ListaDobleCircular<T extends Comparable<? super T>> {
     public void eliminarPares() {
         NodoDoble<T> r = inicio;
         while (r != fin) {
-            if (r.getInfo() instanceof Integer && (Integer)(Object) r.getInfo() % 2 == 0) {
+            if (r.getInfo() instanceof Integer && (Integer) (Object) r.getInfo() % 2 == 0) {
                 if (r == inicio) eliminaInicio();
                 else {
                     r.getAnt().setSiguiente(r.getSiguiente());
@@ -196,7 +196,7 @@ public class ListaDobleCircular<T extends Comparable<? super T>> {
         }
 
         if (r == fin) {
-            if (r.getInfo() instanceof Integer && (Integer)(Object) r.getInfo() % 2 == 0) {
+            if (r.getInfo() instanceof Integer && (Integer) (Object) r.getInfo() % 2 == 0) {
                 r.getAnt().setSiguiente(r.getSiguiente());
                 r.getSiguiente().setAnt(r.getAnt());
             }
@@ -212,7 +212,7 @@ public class ListaDobleCircular<T extends Comparable<? super T>> {
             NodoDoble<T> r = inicio;
             int indiceActual = 0;
 
-            while(r.getSiguiente() != inicio && indiceActual < posicion) {
+            while (r.getSiguiente() != inicio && indiceActual < posicion) {
                 r = r.getSiguiente();
                 indiceActual++;
             }
@@ -231,9 +231,9 @@ public class ListaDobleCircular<T extends Comparable<? super T>> {
         if (inicio == null || fin == null) return;
         else {
             int n = getTamano();
-            for (int i = 0; i < n-1; i++) {
+            for (int i = 0; i < n - 1; i++) {
                 NodoDoble<T> r = inicio;
-                for (int j = 0; j < n-1; j++) {
+                for (int j = 0; j < n - 1; j++) {
                     NodoDoble<T> s = r.getSiguiente();
                     if (r.getInfo().compareTo(s.getInfo()) > 0) {
                         T temp = r.getInfo();
@@ -253,7 +253,7 @@ public class ListaDobleCircular<T extends Comparable<? super T>> {
         else {
             NodoDoble<T> r = inicio;
             int contador = 0;
-            while(contador < posicion-1 && r.getSiguiente() != inicio) {
+            while (contador < posicion - 1 && r.getSiguiente() != inicio) {
                 r = r.getSiguiente();
                 contador++;
             }
@@ -311,6 +311,22 @@ public class ListaDobleCircular<T extends Comparable<? super T>> {
             posicion++;
         }
         return posicion;
+    }
+
+    public void invertirLista() {
+        if (inicio == null) return;
+
+        NodoDoble<T> r = inicio;
+        do {
+            NodoDoble<T> sig = r.getSiguiente();
+            r.setSiguiente(r.getAnt());
+            r.setAnt(sig);
+            r = sig;
+        } while (r != inicio);
+
+        NodoDoble<T> temp = inicio;
+        inicio = fin;
+        fin = temp;
     }
 
     public boolean isEmpty() {
