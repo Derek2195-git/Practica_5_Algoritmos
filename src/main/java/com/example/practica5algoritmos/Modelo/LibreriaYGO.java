@@ -55,14 +55,42 @@ public class LibreriaYGO {
         return lista;
     }
 
-    private void activar(ListaDobleCircular<CartaYGO> lista, TipoVista nuevoModo) {
+    private void pasarListaAActiva(ListaDobleCircular<CartaYGO> lista, TipoVista nuevoModo) {
         lista.devolverActualAlInicio();
         listaActiva = lista;
         tipoDeVista = nuevoModo;
     }
 
     public void mostrarTodas() {
-        activar(listaCartas, TipoVista.TODAS);
+        pasarListaAActiva(listaCartas, TipoVista.TODAS);
+    }
+
+    public void mostrarHechizosTrampas() {
+        pasarListaAActiva(listaHechizosTrampas, TipoVista.HECHIZOS_TRAMPAS);
+    }
+
+    public void mostrarPorNivel(int nivel) {
+        ListaDobleCircular<CartaYGO> listaPorNivel = new ListaDobleCircular<>();
+        // Faltaria algo para ordenar todas las cartas por nivel
+
+        pasarListaAActiva(listaPorNivel, TipoVista.NIVEL);
+    }
+
+    public void mostrarPorAtributo(String atributo) {
+        ListaDobleCircular<CartaYGO> listaPorAtributo = new ListaDobleCircular<>();
+        // Faltaria algo para ordenar todas las cartas por el atributo
+
+        pasarListaAActiva(listaPorAtributo, TipoVista.ATRIBUTO);
+    }
+
+    public void mostrarPorAtaque(boolean descendente) {
+        if (descendente) listaAtaque.invertirLista();
+        pasarListaAActiva(listaAtaque, TipoVista.ATAQUE);
+    }
+
+    public void mostrarPorDefensa(boolean descendente) {
+        if (descendente) listaDefensa.invertirLista();
+        pasarListaAActiva(listaDefensa, TipoVista.DEFENSA);
     }
 
     public void avanzar() {
@@ -96,6 +124,8 @@ public class LibreriaYGO {
     public TipoVista getModo() {
         return tipoDeVista;
     }
+
+
 
 
 
