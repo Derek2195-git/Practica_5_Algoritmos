@@ -3,17 +3,19 @@ package com.example.practica5algoritmos.Modelo;
 public class ListaDobleCircular<T extends Comparable<? super T>> {
     private NodoDoble<T> inicio;
     private NodoDoble<T> fin;
+    private NodoDoble<T> actual;
 
     public ListaDobleCircular() {
         inicio = null;
         fin = null;
+        actual = null;
     }
 
     public void insertaInicio(T dato) {
         NodoDoble<T> n = new NodoDoble<>(dato);
 
         if (inicio == null) {
-            inicio = fin = n;
+            inicio = fin = actual = n;
             n.setSiguiente(inicio);
             n.setAnt(inicio);
         } else {
@@ -28,7 +30,7 @@ public class ListaDobleCircular<T extends Comparable<? super T>> {
     public void insertaFin(T dato) {
         NodoDoble<T> n = new NodoDoble<>(dato);
         if (inicio == null) {
-            inicio = fin = n;
+            inicio = fin = actual = n;
             n.setSiguiente(inicio);
             n.setAnt(inicio);
         } else {
@@ -161,7 +163,7 @@ public class ListaDobleCircular<T extends Comparable<? super T>> {
 
         NodoDoble<T> r = inicio;
         while(r.getSiguiente() != inicio) {
-            if (r.getSiguiente().getInfo() == datoABuscar) return true;
+            if (r.getSiguiente().getInfo().equals(datoABuscar)) return true;
             r = r.getSiguiente();
         }
         return false;
@@ -247,6 +249,7 @@ public class ListaDobleCircular<T extends Comparable<? super T>> {
 
     public void insertaEnPosicion(T dato, int posicion) {
         if (posicion < 0 || inicio == null) insertaInicio(dato);
+        else if (posicion == 0) insertaInicio(dato);
         else {
             NodoDoble<T> r = inicio;
             int contador = 0;
@@ -299,8 +302,51 @@ public class ListaDobleCircular<T extends Comparable<? super T>> {
         }
     }
 
+    public int getPosicionActual() {
+        if (actual == null) return 0;
+        int posicion = 1;
+        NodoDoble<T> r = inicio;
+        while (r != actual) {
+            r = r.getSiguiente();
+            posicion++;
+        }
+        return posicion;
+    }
+
     public boolean isEmpty() {
         return (inicio == null);
+    }
+
+    public T peekInicio() {
+        return inicio == null ? null :  inicio.getInfo();
+    }
+
+    public T peekFin() {
+        return inicio == null ? null : fin.getInfo();
+    }
+
+    public T peekActual() {
+        return actual == null ? null : actual.getInfo();
+    }
+
+    public T peekSiguiente() {
+        return actual == null ? null : actual.getSiguiente().getInfo();
+    }
+
+    public T peekAnterior() {
+        return actual == null ? null : actual.getAnt().getInfo();
+    }
+
+    public void avanzarActual() {
+        if (actual != null) actual = actual.getSiguiente();
+    }
+
+    public void retrocederActual() {
+        if (actual != null) actual = actual.getAnt();
+    }
+
+    public void devolverActualAlInicio() {
+        actual = inicio;
     }
 
 }

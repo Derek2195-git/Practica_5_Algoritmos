@@ -2,7 +2,7 @@ package com.example.practica5algoritmos.Modelo;
 
 import java.util.Comparator;
 
-public class CartaYGO {
+public class CartaYGO implements Comparable<CartaYGO> {
     private String nombre;
     private String atributo;
     private int nivel;
@@ -12,13 +12,6 @@ public class CartaYGO {
     private String rareza;
     private String descripcion;
     private String imagen;
-
-    public static final Comparator<CartaYGO> POR_NOMBRE =
-            Comparator.comparing(CartaYGO::getNombre, String.CASE_INSENSITIVE_ORDER);
-    public static final Comparator<CartaYGO> POR_ATAQUE =
-            Comparator.comparingInt(CartaYGO::getAtaque).thenComparing(POR_NOMBRE);
-    public static final Comparator<CartaYGO> POR_DEFENSA =
-            Comparator.comparingInt(CartaYGO::getDefensa).thenComparing(POR_NOMBRE);
 
     public CartaYGO(String nombre, String atributo, int nivel,
                     String tipo, int ataque, int defensa,
@@ -82,6 +75,10 @@ public class CartaYGO {
         return descripcion;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
     public String getEtiquetaNivel() {
         if (!esMonstruo()) return "N/A";
         if (esLink()) return "Link " + nivel;
@@ -89,9 +86,26 @@ public class CartaYGO {
         return "Nivel " + nivel;
     }
 
+    private int compararAtaque(CartaYGO carta, CartaYGO o) {
+        int resultado = Integer.compare(carta.getAtaque(), o.getAtaque());
+        return resultado != 0 ? resultado : carta.compareTo(o);   // empate: por nombre
+    }
+
+    public int compararDefensa(CartaYGO carta, CartaYGO o) {
+        int resultado = Integer.compare(carta.getDefensa(), o.getDefensa());
+        return resultado != 0 ? resultado : carta.compareTo(o);
+    }
+
     @Override
     public String toString() {
         return nombre + " (" + atributo + ", " + getEtiquetaNivel()
                 + ", ATK " + ataque + ", DEF " + defensa + ")";
     }
+
+    @Override
+    public int compareTo(CartaYGO o) {
+        return nombre.compareToIgnoreCase(o.nombre);
+    }
+
+
 }

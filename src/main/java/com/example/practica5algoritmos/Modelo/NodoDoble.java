@@ -36,7 +36,7 @@ public class NodoDoble<T> {
     @Override
     public String toString() {
         return "Objeto en la lista: " + getInfo() +
-                "Dirección del siguiente objeto: " + getSiguiente();
+                "Siguiente objeto: " + getSiguiente().getInfo();
     }
 
 }
