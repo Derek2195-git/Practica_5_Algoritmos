@@ -32,18 +32,18 @@ public class LibreriaYGO {
             porAtributo.computeIfAbsent(carta.getAtributo(), k -> new ListaDobleCircular<>()).insertaFin(carta);
             monstruosPorAtaque.add(carta);
             if (carta.tieneDefensa()) monstruosPorDefensa.add(carta);   // los Link no tienen DEF
-
-            Collections.sort(monstruosPorAtaque, CartaYGO::compararAtaque);
-            Collections.sort(monstruosPorDefensa, CartaYGO::compararDefensa);
-
-            listaCartas = convertirAListaDC(cartasOrdenadas);
-            listaHechizosTrampas = convertirAListaDC(hechizosTrampas);
-            listaAtaque = convertirAListaDC(monstruosPorAtaque);
-            listaDefensa = convertirAListaDC(monstruosPorDefensa);
-
-            listaActiva = listaCartas;
-            tipoDeVista = TipoVista.TODAS;
         }
+
+        Collections.sort(monstruosPorAtaque, CartaYGO::compararAtaque);
+        Collections.sort(monstruosPorDefensa, CartaYGO::compararDefensa);
+
+        listaCartas = convertirAListaDC(cartasOrdenadas);
+        listaHechizosTrampas = convertirAListaDC(hechizosTrampas);
+        listaAtaque = convertirAListaDC(monstruosPorAtaque);
+        listaDefensa = convertirAListaDC(monstruosPorDefensa);
+
+        listaActiva = listaCartas;
+        tipoDeVista = TipoVista.TODAS;
 
     }
 
@@ -70,26 +70,28 @@ public class LibreriaYGO {
     }
 
     public void mostrarPorNivel(int nivel) {
-        ListaDobleCircular<CartaYGO> listaPorNivel = new ListaDobleCircular<>();
-        // Faltaria algo para ordenar todas las cartas por nivel
-
-        pasarListaAActiva(listaPorNivel, TipoVista.NIVEL);
+        ListaDobleCircular<CartaYGO> lista = porNivel.get(nivel);
+        if (lista != null) pasarListaAActiva(lista, TipoVista.NIVEL);
     }
 
     public void mostrarPorAtributo(String atributo) {
-        ListaDobleCircular<CartaYGO> listaPorAtributo = new ListaDobleCircular<>();
-        // Faltaria algo para ordenar todas las cartas por el atributo
-
-        pasarListaAActiva(listaPorAtributo, TipoVista.ATRIBUTO);
+        ListaDobleCircular<CartaYGO> lista = porAtributo.get(atributo);
+        if (lista != null) pasarListaAActiva(lista, TipoVista.ATRIBUTO);
     }
 
     public void mostrarPorAtaque(boolean descendente) {
-        if (descendente) listaAtaque.invertirLista();
+        if (descendente == listaAtaqueAscendente) {
+            listaAtaque.invertirLista();
+            listaAtaqueAscendente = !descendente;
+        }
         pasarListaAActiva(listaAtaque, TipoVista.ATAQUE);
     }
 
     public void mostrarPorDefensa(boolean descendente) {
-        if (descendente) listaDefensa.invertirLista();
+        if (descendente == listaDefensaAscendente) {
+            listaDefensa.invertirLista();
+            listaDefensaAscendente = !descendente;
+        }
         pasarListaAActiva(listaDefensa, TipoVista.DEFENSA);
     }
 
@@ -123,6 +125,18 @@ public class LibreriaYGO {
 
     public TipoVista getModo() {
         return tipoDeVista;
+    }
+
+    public ArrayList<Integer> getNivelesDisponibles() {
+        ArrayList<Integer> niveles = new ArrayList<>(porNivel.keySet());
+        Collections.sort(niveles);
+        return niveles;
+    }
+
+    public ArrayList<String> getAtributosDisponibles() {
+        ArrayList<String> atributos = new ArrayList<>(porAtributo.keySet());
+        Collections.sort(atributos);
+        return atributos;
     }
 
 

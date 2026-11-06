@@ -1,4 +1,4 @@
-package com.example.practica5algoritmos.Vista;
+package com.example.practica5algoritmos.Vista.ObjetosGUI;
 
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
