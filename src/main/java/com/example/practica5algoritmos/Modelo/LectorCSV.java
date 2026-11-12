@@ -8,9 +8,10 @@ public class LectorCSV {
     private final int COLUMNAS = 10;
     private final int NOMBRE = 0, ATRIBUTO = 1, NIVEL = 2, TIPO = 3, ATK = 4, DEF = 5,
                 rareza = 6, DESCRIPCION = 7, IMAGEN = 9;
+    String ruta = "/cartas_yugioh.csv";
 
-    public ArrayList<CartaYGO> leerCartas(String ruta) throws IOException {
-        ArrayList<String[]> filas = leerFilas(ruta);
+    public ArrayList<CartaYGO> leerCartas() throws IOException {
+        ArrayList<String[]> filas = leerFilas();
         ArrayList<CartaYGO> cartas = new ArrayList<>();
         for (int i = 1; i < filas.size(); i++) {
             String[] celdas = filas.get(i);
@@ -27,7 +28,7 @@ public class LectorCSV {
         return cartas;
     }
 
-    private ArrayList<String[]> leerFilas(String ruta) throws IOException {
+    private ArrayList<String[]> leerFilas() throws IOException {
         InputStream in = LectorCSV.class.getResourceAsStream(ruta);
         if (in == null) throw new IOException("No se encontró el recurso " + ruta);
 
