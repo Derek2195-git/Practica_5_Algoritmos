@@ -18,10 +18,10 @@ public class Launcher extends Application {
 
     private void iniciarMusica() {
         if (musicaFondo != null) return;
-
+        String ruta = "/hip_shop.mp3";
         try {
             Media media = new Media(
-                    getClass().getResource("/hip_shop.mp3").toURI().toString()
+                    getClass().getResource(ruta).toURI().toString()
             );
             musicaFondo = new MediaPlayer(media);
             musicaFondo.setCycleCount(MediaPlayer.INDEFINITE);
@@ -29,7 +29,7 @@ public class Launcher extends Application {
             musicaFondo.setCycleCount(MediaPlayer.INDEFINITE);
             musicaFondo.play();
         } catch (Exception e) {
-            System.out.println("No se encontró el archivo de música.");
+            System.out.println("No se encontró el archivo de música con la ruta " + ruta);
         }
     }
 }
