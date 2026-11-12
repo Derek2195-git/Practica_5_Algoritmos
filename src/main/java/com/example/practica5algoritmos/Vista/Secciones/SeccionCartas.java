@@ -5,6 +5,7 @@ import com.example.practica5algoritmos.Vista.ObjetosGUI.CartaGUI;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.transform.Rotate;
@@ -16,6 +17,7 @@ public class SeccionCartas {
     private CartaGUI cartaIzquierda;
     private CartaGUI cartaDerecha;
     private RotateTransition rotacionCarta;
+    private int tamanosCartasLaterales = 160;
 
     public SeccionCartas(CartaYGO carta) {
         contenedor = new HBox();
@@ -24,6 +26,7 @@ public class SeccionCartas {
         crearCartaIzquierda(carta);
         crearCartaDerecha(carta);
 
+        contenedor.setSpacing(20);
         contenedor.setAlignment(Pos.CENTER);
         contenedor.getChildren().addAll(cartaIzquierda, cartaCentral, cartaDerecha);
     }
@@ -42,11 +45,13 @@ public class SeccionCartas {
 
     public void crearCartaIzquierda(CartaYGO carta) {
         cartaDerecha = new CartaGUI(carta);
+        cartaDerecha.cambiarTamano(tamanosCartasLaterales);
 
     }
 
     public void crearCartaDerecha(CartaYGO carta) {
         cartaIzquierda = new CartaGUI(carta);
+        cartaIzquierda.cambiarTamano(tamanosCartasLaterales);
     }
 
     public HBox getContenedor() {

@@ -4,6 +4,7 @@ import com.example.practica5algoritmos.Modelo.CartaYGO;
 import com.example.practica5algoritmos.Modelo.LectorCSV;
 import com.example.practica5algoritmos.Modelo.LibreriaYGO;
 import com.example.practica5algoritmos.Vista.Secciones.SeccionCartas;
+import com.example.practica5algoritmos.Vista.Secciones.SeccionDetalles;
 import com.example.practica5algoritmos.Vista.VentanaLibreria;
 import javafx.animation.RotateTransition;
 import javafx.scene.Scene;
@@ -34,6 +35,7 @@ public class Controlador {
         ventana.getSeccionCartas().setOnClickCartaIzquierda(this::manejarClickCartaIzquierda);
 
         actualizarCartas();
+        actualizarDetalles();
 
         stage.setTitle("YUGIOH");
         stage.setScene(escena);
@@ -50,17 +52,30 @@ public class Controlador {
 
     public void manejarClickCartaDerecha() {
         libreria.avanzar();
+        actualizarDetalles();
         actualizarCartas();
     }
 
     public void manejarClickCartaIzquierda() {
         libreria.retroceder();
+        actualizarDetalles();
         actualizarCartas();
     }
 
     public void actualizarCartas() {
         SeccionCartas seccionCartas = ventana.getSeccionCartas();
         seccionCartas.mostrarCartas(libreria.getAnterior(), libreria.getActual(), libreria.getSiguiente());
+    }
+
+    public void actualizarDetalles() {
+        SeccionDetalles seccionDetalles = ventana.getSeccionDetalles();
+
+
+        seccionDetalles.actualizarDetalles(libreria.getActual().getNombre(), libreria.getActual().getAtributo(),
+                String.valueOf(libreria.getActual().getNivel()), libreria.getActual().getTipo(),
+                String.valueOf(libreria.getActual().getAtaque()), String.valueOf(libreria.getActual().getDefensa()),
+                libreria.getActual().getRareza(), libreria.getActual().getDescripcion());
+
     }
 
 }

@@ -101,4 +101,15 @@ public class ImageButton extends Button {
     public Image getImagen() {
         return imagen;
     }
+
+    public void cambiarTamanoImagen(int alto, int ancho) {
+        this.alto = alto;
+        this.ancho = ancho;
+
+        if (getGraphic() instanceof ImageView) {
+            ImageView icono = (ImageView) getGraphic();
+            icono.setFitHeight(alto);
+            icono.setFitWidth(ancho);
+        }
+    }
 }

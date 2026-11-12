@@ -7,3 +7,11 @@
     -fx-faint-focus-color: transparent;
     -fx-font-size: 13px;
 }
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-padding: 0 0 0 12;
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}

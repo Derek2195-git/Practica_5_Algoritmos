@@ -49,6 +49,10 @@ public class CartaGUI extends ImageButton {
         return "/cartas_por_id/" + ruta;
     }
 
+    public void cambiarTamano(int tamanoCarta) {
+        cambiarTamanoImagen(tamanoCarta, tamanoCarta/2);
+    }
+
     public int getAncho() {
         return ANCHO;
     }
