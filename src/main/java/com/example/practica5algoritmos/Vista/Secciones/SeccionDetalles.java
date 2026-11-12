@@ -20,7 +20,7 @@ public class SeccionDetalles {
 
     public void actualizarDetalles(String nombre, String atributo, String nivel, String tipo, String ataque,
                                    String defensa, String rareza, String descripcion) {
-        detallesCartaActual.actualizarDetalles(nombre, atributo, nivel, tipo, ataque, defensa, rareza, descripcion);
+        detallesCartaActual.actualizarDetalles(nombre, atributo, Integer.valueOf(nivel), tipo, ataque, defensa, rareza, descripcion);
     }
 
     public VBox getContenedor() {
