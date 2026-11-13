@@ -35,6 +35,12 @@ public class Controlador {
         ventana.getSeccionCartas().setOnClickCartaIzquierda(this::manejarClickCartaIzquierda);
         ventana.getSeccionOpciones().alSeleccionarFiltros(this::manejarClickFiltro);
 
+        ventana.getSeccionFiltros().alMostrarTodos(this::manejarMostrarTodos);
+        ventana.getSeccionFiltros().alMostrarPorAtributos(this::manejarMostrarAtributos);
+        ventana.getSeccionFiltros().alMostrarPorNiveles(this::manejarMostrarNiveles);
+        ventana.getSeccionFiltros().alMostrarPorAtaque(this::manejarMostrarAtaque);
+        ventana.getSeccionFiltros().alMostrarPorDefensa(this::manejarMostrarDefensa);
+
         actualizarCartas();
         actualizarDetalles();
 
@@ -76,11 +82,47 @@ public class Controlador {
                 String.valueOf(libreria.getActual().getNivel()), libreria.getActual().getTipo(),
                 String.valueOf(libreria.getActual().getAtaque()), String.valueOf(libreria.getActual().getDefensa()),
                 libreria.getActual().getRareza(), libreria.getActual().getDescripcion());
+        // Y solo me quedaria actualizar el label aqui
+        ventana.actualizarCantidadCartas(libreria.getPosicion(), libreria.getTotal());
 
     }
 
     public void manejarClickFiltro() {
-
+        ventana.getSeccionFiltros().mostrarBotones(true);
     }
+
+
+    public void manejarMostrarTodos() {
+        libreria.mostrarTodas();
+        actualizarCartas();
+        actualizarDetalles();
+    }
+
+    public void manejarMostrarNiveles() {
+        // Por mientras serán todas las de nivel 1
+        libreria.mostrarPorNivel(1);
+        actualizarCartas();
+        actualizarDetalles();
+    }
+
+    public void manejarMostrarAtributos() {
+        libreria.mostrarPorAtributo("DARK");
+        actualizarCartas();
+        actualizarDetalles();
+    }
+
+    public void manejarMostrarAtaque() {
+        libreria.mostrarPorAtaque(true);
+        actualizarDetalles();
+        actualizarCartas();
+    }
+
+    public void manejarMostrarDefensa() {
+        libreria.mostrarPorDefensa(true);
+        actualizarDetalles();
+        actualizarCartas();
+    }
+
+
 
 }

@@ -1,6 +1,8 @@
 package com.example.practica5algoritmos.Vista.Secciones;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 
 public class SeccionFiltros {
     private Button botonTodos;
@@ -8,6 +10,7 @@ public class SeccionFiltros {
     private Button botonAtributos;
     private Button botonAtaque;
     private Button botonDefensa;
+    private VBox contenedor;
 
     public SeccionFiltros() {
         botonTodos = new Button("Mostrar todos");
@@ -24,6 +27,11 @@ public class SeccionFiltros {
 
         botonDefensa = new Button("Mostrar por Defensa");
         botonDefensa.getStyleClass().add("boton-filtro");
+
+        contenedor = new VBox();
+        contenedor.setAlignment(Pos.CENTER_LEFT);
+        contenedor.getChildren().addAll(botonTodos, botonNiveles,
+                botonAtributos, botonAtaque, botonDefensa);
 
 
     }
@@ -54,5 +62,9 @@ public class SeccionFiltros {
 
     public void alMostrarPorDefensa(Runnable accion) {
         botonDefensa.setOnAction(e-> accion.run());
+    }
+
+    public VBox getContenedor() {
+        return contenedor;
     }
 }
