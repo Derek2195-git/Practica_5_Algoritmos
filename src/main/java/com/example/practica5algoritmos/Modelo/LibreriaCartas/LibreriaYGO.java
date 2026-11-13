@@ -1,4 +1,6 @@
-package com.example.practica5algoritmos.Modelo;
+package com.example.practica5algoritmos.Modelo.LibreriaCartas;
+
+import com.example.practica5algoritmos.Modelo.Listas.ListaDobleCircular;
 
 import java.util.ArrayList;
 import java.util.Collections;

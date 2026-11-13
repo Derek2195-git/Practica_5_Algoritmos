@@ -1,11 +1,10 @@
 package com.example.practica5algoritmos.Vista.Secciones;
 
-import com.example.practica5algoritmos.Modelo.CartaYGO;
+import com.example.practica5algoritmos.Modelo.LibreriaCartas.CartaYGO;
 import com.example.practica5algoritmos.Vista.ObjetosGUI.CartaGUI;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.transform.Rotate;

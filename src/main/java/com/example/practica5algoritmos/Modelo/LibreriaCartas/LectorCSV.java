@@ -1,4 +1,4 @@
-package com.example.practica5algoritmos.Modelo;
+package com.example.practica5algoritmos.Modelo.LibreriaCartas;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -8,7 +8,7 @@ public class LectorCSV {
     private final int COLUMNAS = 10;
     private final int NOMBRE = 0, ATRIBUTO = 1, NIVEL = 2, TIPO = 3, ATK = 4, DEF = 5,
                 rareza = 6, DESCRIPCION = 7, IMAGEN = 9;
-    String ruta = "/cartas_yugioh.csv";
+    String ruta = "/recursos/cartas_yugioh.csv";
 
     public ArrayList<CartaYGO> leerCartas() throws IOException {
         ArrayList<String[]> filas = leerFilas();

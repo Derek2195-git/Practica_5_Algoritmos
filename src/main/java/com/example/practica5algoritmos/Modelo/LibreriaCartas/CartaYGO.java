@@ -1,4 +1,4 @@
-package com.example.practica5algoritmos.Modelo;
+package com.example.practica5algoritmos.Modelo.LibreriaCartas;
 
 public class CartaYGO implements Comparable<CartaYGO> {
     private String nombre;

@@ -1,19 +1,14 @@
 package com.example.practica5algoritmos.Vista.ObjetosGUI;
 
-import com.example.practica5algoritmos.Modelo.CartaYGO;
-import com.example.practica5algoritmos.Modelo.ListaCircular;
-import javafx.geometry.Insets;
+import com.example.practica5algoritmos.Modelo.Listas.ListaCircular;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 
 public class DescripcionCarta extends VBox {
     private Label labelNombre ;
@@ -37,7 +32,11 @@ public class DescripcionCarta extends VBox {
 
         labelRareza = new Label("Rareza: ");
         labelDescripcion = new Label();
-        rarezaCarta = new HBox();
+        labelDescripcion.setMaxWidth(550);
+        labelDescripcion.setWrapText(true);
+
+        labelDescripcion.setTextAlignment(TextAlignment.JUSTIFY);
+        rarezaCarta = new HBox(5);
         rarezaCarta.setAlignment(Pos.CENTER);
 
 
@@ -59,7 +58,7 @@ public class DescripcionCarta extends VBox {
         for (int i = 0; i < rareza; i++) {
             try {
                 // 2. Usa la ruta correcta desde tu carpeta resources
-                Image imagen = new Image(getClass().getResource("/RarezaCartaYGO.png").toExternalForm());
+                Image imagen = new Image(getClass().getResource("/recursos/iconos/RarezaCartaYGO.png").toExternalForm());
                 ImageView icono = new ImageView(imagen);
 
                 icono.setFitHeight(32);
@@ -76,24 +75,64 @@ public class DescripcionCarta extends VBox {
 
     public void actualizarDetalles(String nombre, String atributo, int nivel, String tipo, String ataque,
                                    String defensa, String rareza, String descripcion) {
-        labelNombre.setText(nombre);
-        labelAtributo.setText(atributo);
-        anadirNivelCarta(nivel);
-        labelTipo.setText(tipo);
-        labelAtaque.setText(ataque);
-        labelDefensa.setText(defensa);
-        labelRareza.setText(rareza);
-        labelDescripcion.setText(descripcion);
+
+        configurarVisibilidadLabel(labelNombre, nombre, nombre);
+        configurarVisibilidadLabel(labelAtributo, atributo, atributo);
+        configurarVisibilidadLabel(labelTipo, tipo, tipo);
+        configurarVisibilidadLabel(labelRareza, rareza, rareza);
+        configurarVisibilidadLabel(labelDescripcion, descripcion, descripcion);
+
+        configurarVisibilidadLabel(labelAtaque, ataque, "ATK: " + ataque);
+        configurarVisibilidadLabel(labelDefensa, defensa, "DEF: " + defensa);
+
+
+
+        if (nivel == -1 || nivel == 0) {
+            rarezaCarta.setVisible(false);
+            rarezaCarta.setManaged(false);
+        } else {
+            rarezaCarta.setVisible(true);
+            rarezaCarta.setManaged(true);
+            anadirNivelCarta(nivel);
+        }
     }
 
     public VBox crearContenedor() {
-        VBox contenedorDescripcion = new VBox();
-
-        contenedorDescripcion.getChildren().addAll(labelNombre, labelAtributo, rarezaCarta, labelTipo,
-                labelAtaque, labelDefensa, labelRareza,labelDescripcion);
+        VBox contenedorDescripcion = new VBox(5);
+        contenedorDescripcion.setMaxWidth(Region.USE_PREF_SIZE);
         contenedorDescripcion.setAlignment(Pos.CENTER);
 
+        HBox primeraFila = new HBox();
+        primeraFila.setAlignment(Pos.CENTER);
+        primeraFila.getChildren().addAll(labelRareza, labelNombre, labelAtributo);
+
+
+        HBox segundaFila = new HBox();
+        segundaFila.setAlignment(Pos.CENTER);
+        segundaFila.getChildren().addAll(rarezaCarta);
+
+        HBox penultimaFila = new HBox(30);
+        penultimaFila.setAlignment(Pos.CENTER);
+        penultimaFila.getChildren().addAll(labelAtaque, labelDefensa);
+
+        contenedorDescripcion.getChildren().addAll(
+                primeraFila, segundaFila, labelTipo, penultimaFila, labelDescripcion
+        );
+        contenedorDescripcion.getStyleClass().add("descripcion");
+
+
         return contenedorDescripcion;
+    }
+
+    private void configurarVisibilidadLabel(Label label, String valorOriginal, String textoFinal) {
+        if (valorOriginal == null || valorOriginal.equals("N/A") || valorOriginal.equals("-1")) {
+            label.setVisible(false);
+            label.setManaged(false); // Evita que ocupe espacio en el contenedor
+        } else {
+            label.setText(textoFinal);
+            label.setVisible(true);
+            label.setManaged(true); // Lo vuelve a incluir en el layout
+        }
     }
 
     public void meterEstilos() {

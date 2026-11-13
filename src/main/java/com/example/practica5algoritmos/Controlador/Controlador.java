@@ -1,8 +1,8 @@
 package com.example.practica5algoritmos.Controlador;
 
-import com.example.practica5algoritmos.Modelo.CartaYGO;
-import com.example.practica5algoritmos.Modelo.LectorCSV;
-import com.example.practica5algoritmos.Modelo.LibreriaYGO;
+import com.example.practica5algoritmos.Modelo.LibreriaCartas.CartaYGO;
+import com.example.practica5algoritmos.Modelo.LibreriaCartas.LectorCSV;
+import com.example.practica5algoritmos.Modelo.LibreriaCartas.LibreriaYGO;
 import com.example.practica5algoritmos.Vista.Secciones.SeccionCartas;
 import com.example.practica5algoritmos.Vista.Secciones.SeccionDetalles;
 import com.example.practica5algoritmos.Vista.VentanaLibreria;
@@ -33,6 +33,7 @@ public class Controlador {
         ventana.getSeccionCartas().setOnClickCartaCentral(this::manejarClickCartaCentral);
         ventana.getSeccionCartas().setOnClickCartaDerecha(this::manejarClickCartaDerecha);
         ventana.getSeccionCartas().setOnClickCartaIzquierda(this::manejarClickCartaIzquierda);
+        ventana.getSeccionOpciones().alSeleccionarFiltros(this::manejarClickFiltro);
 
         actualizarCartas();
         actualizarDetalles();
@@ -75,6 +76,10 @@ public class Controlador {
                 String.valueOf(libreria.getActual().getNivel()), libreria.getActual().getTipo(),
                 String.valueOf(libreria.getActual().getAtaque()), String.valueOf(libreria.getActual().getDefensa()),
                 libreria.getActual().getRareza(), libreria.getActual().getDescripcion());
+
+    }
+
+    public void manejarClickFiltro() {
 
     }
 

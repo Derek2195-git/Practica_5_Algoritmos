@@ -1,4 +1,4 @@
-package com.example.practica5algoritmos.Modelo;
+package com.example.practica5algoritmos.Modelo.Listas;
 
 public class ListaDobleCircular<T extends Comparable<? super T>> {
     private NodoDoble<T> inicio;

@@ -1,0 +1,38 @@
+.root {
+    -fx-background-color: #282a36;
+    -fx-base: #44475a;
+    -fx-background: #282a36;
+    -fx-accent: #bd93f9;
+    -fx-focus-color: #bd93f9;
+    -fx-faint-focus-color: transparent;
+    -fx-font-size: 13px;
+}
+
+.boton-filtro {
+    -fx-background-color: #bd93f9;
+    -fx-background-radius: 8;
+    -fx-text-fill: #f8f8f2;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 16 6 16;
+    -fx-cursor: hand;
+}
+
+.boton-filtro:hover {
+    -fx-background-color: #cbb2fd;
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-padding: 0 0 0 12;
+    -fx-wrap-text: true;
+}
+
+.descripcion {
+    -fx-padding: 10 10 20 0;
+    -fx-background-color: #4d2569;
+    -fx-border-radius: 2;
+    -fx-border-width: 0;
+    -fx-background-radius: 10px;
+}

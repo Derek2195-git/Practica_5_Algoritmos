@@ -1,4 +1,4 @@
-package com.example.practica5algoritmos.Modelo;
+package com.example.practica5algoritmos.Modelo.Listas;
 
 public class Nodo<T> {
     private T info;

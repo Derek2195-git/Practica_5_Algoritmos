@@ -1,4 +1,4 @@
-package com.example.practica5algoritmos.Modelo;
+package com.example.practica5algoritmos.Modelo.Listas;
 
 public class ListaCircular<T> {
     private Nodo<T> inicio;

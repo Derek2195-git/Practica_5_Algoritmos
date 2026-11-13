@@ -4,7 +4,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class BotonSonido extends ImageButton {
-    private static final String ICONO_SONANDO = "/recursos/iconos/sonido.png";
+    private static final String ICONO_SONANDO = "/recursos/iconos/sonidoActivado.png";
     private static final String ICONO_SILENCIO = "/recursos/iconos/silencio.png";
     private static final double VOLUMEN = 0.35;
 
