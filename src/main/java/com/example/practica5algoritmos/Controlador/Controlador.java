@@ -82,13 +82,14 @@ public class Controlador {
                 String.valueOf(libreria.getActual().getNivel()), libreria.getActual().getTipo(),
                 String.valueOf(libreria.getActual().getAtaque()), String.valueOf(libreria.getActual().getDefensa()),
                 libreria.getActual().getRareza(), libreria.getActual().getDescripcion());
+
         // Y solo me quedaria actualizar el label aqui
         ventana.actualizarCantidadCartas(libreria.getPosicion(), libreria.getTotal());
 
     }
 
     public void manejarClickFiltro() {
-        ventana.getSeccionFiltros().mostrarBotones(true);
+        ventana.getSeccionFiltros().alternarVisibilidadBotones();
     }
 
 

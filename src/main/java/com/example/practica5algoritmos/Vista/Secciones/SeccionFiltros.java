@@ -1,7 +1,9 @@
 package com.example.practica5algoritmos.Vista.Secciones;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class SeccionFiltros {
@@ -11,37 +13,38 @@ public class SeccionFiltros {
     private Button botonAtaque;
     private Button botonDefensa;
     private VBox contenedor;
+    private boolean seccionVisible = false;
 
     public SeccionFiltros() {
-        botonTodos = new Button("Mostrar todos");
-        botonTodos.getStyleClass().add("boton-filtro");
+        botonTodos = crearBoton("Mostrar todos");
+        botonNiveles = crearBoton("Mostrar por Niveles");
+        botonAtributos = crearBoton("Mostrar por Atributos");
+        botonAtaque = crearBoton("Mostrar por Ataque");
+        botonDefensa = crearBoton("Mostrar por Defensa");
 
-        botonNiveles = new Button("Mostrar por Niveles");
-        botonNiveles.getStyleClass().add("boton-filtro");
 
-        botonAtributos = new Button("Mostrar por Atributos");
-        botonAtributos.getStyleClass().add("boton-filtro");
-
-        botonAtaque = new Button("Mostrar por Ataque");
-        botonAtaque.getStyleClass().add("boton-filtro");
-
-        botonDefensa = new Button("Mostrar por Defensa");
-        botonDefensa.getStyleClass().add("boton-filtro");
-
-        contenedor = new VBox();
+        contenedor = new VBox(8);
         contenedor.setAlignment(Pos.CENTER_LEFT);
+        contenedor.setPadding(new Insets(12));
+        contenedor.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         contenedor.getChildren().addAll(botonTodos, botonNiveles,
                 botonAtributos, botonAtaque, botonDefensa);
 
+        contenedor.setVisible(false);
 
     }
 
-    public void mostrarBotones(boolean esVisible) {
-        botonTodos.setVisible(esVisible);
-        botonNiveles.setVisible(esVisible);
-        botonAtributos.setVisible(esVisible);
-        botonAtaque.setVisible(esVisible);
-        botonDefensa.setVisible(esVisible);
+    public Button crearBoton(String nombreBoton) {
+        Button boton = new Button(nombreBoton);
+        boton.getStyleClass().add("boton-filtro");
+
+        return boton;
+
+    }
+
+    public void alternarVisibilidadBotones() {
+        seccionVisible = !seccionVisible;
+        contenedor.setVisible(seccionVisible);
     }
 
     public void alMostrarTodos(Runnable accion) {

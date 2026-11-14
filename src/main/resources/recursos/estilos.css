@@ -26,6 +26,7 @@
     -fx-text-fill: white;
     -fx-font-size: 24px;
     -fx-padding: 0 0 0 12;
+    -fx-wrap-text: true;
 }
 
 .label {
@@ -33,6 +34,10 @@
     -fx-font-size: 15px;
     -fx-padding: 0 0 0 12;
     -fx-wrap-text: true;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
 }
 
 .descripcion {
