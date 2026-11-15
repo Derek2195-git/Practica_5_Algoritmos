@@ -42,6 +42,7 @@ public class DescripcionCarta extends VBox {
         descripcionCarta = new ScrollPane(labelDescripcion);
         descripcionCarta.setFitToWidth(true);
         descripcionCarta.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        descripcionCarta.getStyleClass().add("scroll-descripcion");
         VBox.setVgrow(descripcionCarta, Priority.ALWAYS);
 
         rarezaCarta = new HBox(5);
@@ -140,14 +141,6 @@ public class DescripcionCarta extends VBox {
             label.setText(textoFinal);
             label.setVisible(true);
             label.setManaged(true); // Lo vuelve a incluir en el layout
-        }
-    }
-
-    public void meterEstilos() {
-        Label labelActual = listaDetalles.eliminaFin();
-        while (labelActual != null) {
-            labelActual.getStyleClass().add("label");
-            labelActual = listaDetalles.eliminaFin();
         }
     }
 }

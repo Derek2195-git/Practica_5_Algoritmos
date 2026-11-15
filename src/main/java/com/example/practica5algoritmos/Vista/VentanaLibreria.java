@@ -3,59 +3,54 @@ package com.example.practica5algoritmos.Vista;
 import com.example.practica5algoritmos.Modelo.LibreriaCartas.CartaYGO;
 import com.example.practica5algoritmos.Vista.Secciones.SeccionCartas;
 import com.example.practica5algoritmos.Vista.Secciones.SeccionDetalles;
-import com.example.practica5algoritmos.Vista.Secciones.SeccionFiltros;
 import com.example.practica5algoritmos.Vista.Secciones.SeccionOpciones;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 
 public class VentanaLibreria {
 
-    private StackPane ventana;
+    private final double ALTO_DETALLES = 260;
+
+    private BorderPane ventana;
     private SeccionCartas seccionCartas;
     private SeccionDetalles seccionDetalles;
     private SeccionOpciones seccionOpciones;
-    private SeccionFiltros seccionFiltros;
+    private VentanaFiltros seccionFiltros;
     private Label totalCartas;
 
     public VentanaLibreria(CartaYGO carta) {
         seccionCartas = new SeccionCartas(carta);
         seccionDetalles = new SeccionDetalles();
         seccionOpciones = new SeccionOpciones();
-        seccionFiltros = new SeccionFiltros();
+        seccionFiltros = new VentanaFiltros();
         totalCartas = new Label("");
         totalCartas.getStyleClass().add("label-cantidad");
 
-        BorderPane barraSuperior = new BorderPane();
-        barraSuperior.setLeft(seccionOpciones.getContenedor());
-        barraSuperior.setCenter(totalCartas);
+        seccionOpciones.getContenedor().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        StackPane barraSuperior = new StackPane(seccionOpciones.getContenedor(), totalCartas);
+        StackPane.setAlignment(seccionOpciones.getContenedor(), Pos.CENTER_LEFT);
+        StackPane.setAlignment(totalCartas, Pos.CENTER);
         barraSuperior.setPadding(new Insets(10));
 
         StackPane detallesCartas = new StackPane(seccionDetalles.getContenedor());
-        detallesCartas.setMinHeight(170);
-        detallesCartas.setPrefHeight(170);
-        detallesCartas.setMaxHeight(170);
-        detallesCartas.setPadding(new Insets(0, 16, 16, 16));
+        detallesCartas.setMinHeight(ALTO_DETALLES);
+        detallesCartas.setPrefHeight(ALTO_DETALLES);
+        detallesCartas.setMaxHeight(ALTO_DETALLES);
+        detallesCartas.setPadding(new Insets(0, 16, 12, 16));
 
-        BorderPane contenido = new BorderPane();
-        contenido.setTop(barraSuperior);
-        contenido.setCenter(seccionCartas.getContenedor());
-        contenido.setBottom(detallesCartas);
-
-        VBox filtros = seccionFiltros.getContenedor();
-        StackPane.setAlignment(filtros, Pos.CENTER_LEFT);
-        StackPane.setMargin(filtros, new Insets(0, 0, 0, 12));
-
-        ventana = new StackPane(contenido, filtros);
+        ventana = new BorderPane();
+        ventana.setTop(barraSuperior);
+        ventana.setCenter(seccionCartas.getContenedor());
+        ventana.setBottom(detallesCartas);
 
         ventana.getStylesheets().add(getClass().getResource("/recursos/estilos.css").toExternalForm());
     }
 
-    public StackPane getVentana() {
+    public BorderPane getVentana() {
         return ventana;
     }
 
@@ -71,7 +66,7 @@ public class VentanaLibreria {
         return seccionOpciones;
     }
 
-    public SeccionFiltros getSeccionFiltros() {
+    public VentanaFiltros getSeccionFiltros() {
         return seccionFiltros;
     }
 

@@ -18,8 +18,10 @@ public class Controlador {
     private ArrayList<CartaYGO> cartas;
     private VentanaLibreria ventana;
     private LibreriaYGO libreria;
+    private Stage stage;
 
     public Controlador(Stage stage) {
+        this.stage = stage;
         try {
             cartas = new LectorCSV().leerCartas();
         } catch (IOException e) {
@@ -89,7 +91,7 @@ public class Controlador {
     }
 
     public void manejarClickFiltro() {
-        ventana.getSeccionFiltros().alternarVisibilidadBotones();
+        ventana.getSeccionFiltros().abrirVentana(stage);
     }
 
 

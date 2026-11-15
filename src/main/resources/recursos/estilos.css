@@ -24,9 +24,15 @@
 
 .label-cantidad {
     -fx-text-fill: white;
+    -fx-font-weight: bold;
     -fx-font-size: 24px;
-    -fx-padding: 0 0 0 12;
+    -fx-padding: 0 12 0 0;
     -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
+
+.scroll-descripcion, .scroll-descripcion > .viewport {
+    -fx-background-color: transparent;
 }
 
 .label {
