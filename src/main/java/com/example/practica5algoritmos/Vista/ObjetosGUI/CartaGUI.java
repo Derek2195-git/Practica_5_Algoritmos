@@ -28,7 +28,7 @@ public class CartaGUI extends ImageButton {
     }
 
     public static String generarRuta(String ruta) {
-        return "/cartas_por_id/" + ruta;
+        return "/recursos/cartas_por_id/" + ruta;
     }
 
     public void cambiarTamano(int tamanoCarta) {

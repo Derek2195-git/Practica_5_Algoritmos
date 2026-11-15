@@ -46,7 +46,6 @@ public class LibreriaYGO {
 
         listaActiva = listaCartas;
         tipoDeVista = TipoVista.TODAS;
-
     }
 
     private ListaDobleCircular<CartaYGO> convertirAListaDC(ArrayList<CartaYGO> cartas) {
@@ -129,21 +128,9 @@ public class LibreriaYGO {
         return tipoDeVista;
     }
 
-    public ArrayList<Integer> getNivelesDisponibles() {
-        ArrayList<Integer> niveles = new ArrayList<>(porNivel.keySet());
-        Collections.sort(niveles);
-        return niveles;
-    }
-
     public ArrayList<String> getAtributosDisponibles() {
         ArrayList<String> atributos = new ArrayList<>(porAtributo.keySet());
         Collections.sort(atributos);
         return atributos;
     }
-
-
-
-
-
-
 }

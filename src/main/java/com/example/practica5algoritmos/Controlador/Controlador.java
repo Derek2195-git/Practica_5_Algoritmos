@@ -5,7 +5,7 @@ import com.example.practica5algoritmos.Modelo.LibreriaCartas.LectorCSV;
 import com.example.practica5algoritmos.Modelo.LibreriaCartas.LibreriaYGO;
 import com.example.practica5algoritmos.Vista.Secciones.SeccionCartas;
 import com.example.practica5algoritmos.Vista.Secciones.SeccionDetalles;
-import com.example.practica5algoritmos.Vista.VentanaLibreria;
+import com.example.practica5algoritmos.Vista.Ventana.VentanaLibreria;
 import javafx.animation.RotateTransition;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -50,7 +50,7 @@ public class Controlador {
         stage.setTitle("YUGIOH");
         stage.setScene(escena);
         stage.show();
-
+        
     }
 
 

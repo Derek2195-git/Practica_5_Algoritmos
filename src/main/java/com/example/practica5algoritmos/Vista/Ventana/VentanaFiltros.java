@@ -1,8 +1,6 @@
-package com.example.practica5algoritmos.Vista;
+package com.example.practica5algoritmos.Vista.Ventana;
 
-import com.example.practica5algoritmos.Modelo.Listas.ListaCircular;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -11,8 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -138,7 +134,7 @@ public class VentanaFiltros {
 
         ventana = new Stage();
         ventana.initOwner(ventanaPrincipal);
-        ventana.setTitle("Filtros de visuaizacon");
+        ventana.setTitle("Filtros de visualizacion");
         ventana.setResizable(false);
         ventana.setScene(escena);
 

@@ -1,17 +1,17 @@
 .root {
-    -fx-background-color: #282a36;
-    -fx-base: #44475a;
-    -fx-background: #282a36;
-    -fx-accent: #bd93f9;
-    -fx-focus-color: #bd93f9;
+    -fx-background-color: radial-gradient(center 50% 45%, radius 75%, #2e274f, #0f0b1e);
+    -fx-base: #2a1f4d;
+    -fx-background: #0f0b1e;
+    -fx-accent: #9b53f5;
+    -fx-focus-color: #2bb3ff;
     -fx-faint-focus-color: transparent;
     -fx-font-size: 13px;
 }
 
 .boton-filtro {
-    -fx-background-color: #bd93f9;
+    -fx-background-color: #d4af37;
     -fx-background-radius: 8;
-    -fx-text-fill: #f8f8f2;
+    -fx-text-fill: #ffffff;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
     -fx-padding: 6 16 6 16;
@@ -19,7 +19,7 @@
 }
 
 .boton-filtro:hover {
-    -fx-background-color: #cbb2fd;
+    -fx-background-color: #f2cf66;
 }
 
 .label-cantidad {
@@ -47,6 +47,9 @@
 
 .descripcion {
     -fx-padding: 10 12 12 12;
-    -fx-background-color: #4d2569;
+    -fx-background-color: #2b1b4a;
     -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1.5px;
+    -fx-border-color: #460a6b;
 }

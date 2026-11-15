@@ -1,4 +1,4 @@
-package com.example.practica5algoritmos.Vista;
+package com.example.practica5algoritmos.Vista.Ventana;
 
 import com.example.practica5algoritmos.Modelo.LibreriaCartas.CartaYGO;
 import com.example.practica5algoritmos.Vista.Secciones.SeccionCartas;

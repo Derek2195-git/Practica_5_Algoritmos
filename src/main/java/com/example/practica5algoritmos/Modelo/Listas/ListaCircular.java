@@ -2,18 +2,18 @@ package com.example.practica5algoritmos.Modelo.Listas;
 
 public class ListaCircular<T> {
     private Nodo<T> inicio;
+    private Nodo<T> actual;
     private Nodo<T> fin;
 
     public ListaCircular() {
-        inicio = null;
-        fin = null;
+        inicio = fin = actual = null;
     }
 
     public void insertaInicio(T dato) {
         Nodo<T> n = new Nodo<>(dato);
 
         if (inicio == null) {
-            inicio = fin = n;
+            inicio = fin = actual = n;
             n.setSiguiente(inicio);
         } else {
             n.setSiguiente(inicio);
@@ -26,7 +26,7 @@ public class ListaCircular<T> {
     public void insertaFin(T dato) {
         Nodo<T> n = new Nodo<>(dato);
         if (inicio == null) {
-            inicio = fin = n;
+            inicio = fin = actual = n;
             n.setSiguiente(inicio);
         } else {
             n.setSiguiente(inicio);
@@ -42,7 +42,7 @@ public class ListaCircular<T> {
         } else {
             T dato = inicio.getInfo();
             if (inicio == fin) {
-                inicio = fin = null;
+                inicio = fin = actual = null;
             } else {
                 fin.setSiguiente(inicio.getSiguiente());
                 inicio = inicio.getSiguiente();
@@ -52,24 +52,25 @@ public class ListaCircular<T> {
     }
 
     public T eliminaFin() {
-        T dato = null;
         if (inicio == null) {
             System.out.println("Lista vacia");
-            return dato;
+            return null;
         } else {
+            Nodo<T> dato = fin;
             if (inicio == fin) {
-                inicio = fin = null;
-                dato = inicio.getInfo();
+                inicio = fin = actual = null;
             } else {
                 Nodo<T> r = inicio;
-                while (r.getSiguiente() != null) {
+                while (r.getSiguiente() != fin) {
                     r = r.getSiguiente();
                 }
                 fin = r;
+                if(actual == dato) actual = inicio;
                 fin.setSiguiente(inicio);
             }
+            return dato.getInfo();
         }
-        return dato;
+
     }
 
     /*
@@ -112,11 +113,10 @@ public class ListaCircular<T> {
     }
 
     public boolean buscar(Nodo<T> nodo, T info) {
-        if (nodo.getSiguiente() == null || nodo.getSiguiente() == inicio) return false;
+        if (nodo == null) return false;
         else if (nodo.getInfo().equals(info)) return true;
-        else {
-            return buscar(nodo.getSiguiente(), info);
-        }
+        else if (nodo.getSiguiente() == inicio) return false;
+        else return buscar(nodo.getSiguiente(), info);
     }
 
     public boolean buscarEnLaLista(T infoABuscar) {
@@ -176,5 +176,37 @@ public class ListaCircular<T> {
             r.setSiguiente(nodoAInsertar);
             if (r == fin) fin = nodoAInsertar;
         }
+    }
+
+    public int getTamano() {
+        if (inicio == null) return 0;
+        int tamano = 0;
+        Nodo<T> r = inicio;
+        do {
+            tamano++;
+            r = r.getSiguiente();
+        } while (r != inicio);
+        return tamano;
+    }
+
+
+    public boolean isEmpty() {
+        return inicio == null;
+    }
+
+    public T peekActual() {
+        return actual == null ? null : actual.getInfo();
+    }
+
+    public T peekSiguiente() {
+        return actual == null ? null : actual.getSiguiente().getInfo();
+    }
+
+    public void avanzar() {
+        if (actual != null) actual = actual.getSiguiente();
+    }
+
+    public void retornarAlInicio() {
+        actual = inicio;
     }
 }
