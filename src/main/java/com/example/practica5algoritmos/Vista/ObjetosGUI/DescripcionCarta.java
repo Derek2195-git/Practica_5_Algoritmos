@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 public class DescripcionCarta extends VBox {
+    private final int TAMANO_ICONO = 22;
     private Label labelNombre ;
     private Label labelAtributo ;
 
@@ -24,6 +25,7 @@ public class DescripcionCarta extends VBox {
     private Label labelDescripcion ;
     private ScrollPane descripcionCarta;
     private ListaCircular<Label> listaDetalles;
+    private Image iconoNivel;
 
     public DescripcionCarta() {
         listaDetalles = new ListaCircular<>();
@@ -35,19 +37,29 @@ public class DescripcionCarta extends VBox {
 
         labelRareza = new Label("Rareza: ");
         labelDescripcion = new Label();
-        labelDescripcion.setMaxWidth(650);
         labelDescripcion.setWrapText(true);
+        labelDescripcion.setMaxWidth(Double.MAX_VALUE);
         labelDescripcion.setTextAlignment(TextAlignment.JUSTIFY);
+        labelDescripcion.getStyleClass().add("label-descripcion");
 
         descripcionCarta = new ScrollPane(labelDescripcion);
         descripcionCarta.setFitToWidth(true);
         descripcionCarta.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        descripcionCarta.setMinHeight(60);
+        descripcionCarta.setPrefHeight(60);
         descripcionCarta.getStyleClass().add("scroll-descripcion");
         VBox.setVgrow(descripcionCarta, Priority.ALWAYS);
 
         rarezaCarta = new HBox(5);
         rarezaCarta.setAlignment(Pos.CENTER);
 
+        try {
+            iconoNivel = new Image(getClass().getResource("/recursos/iconos/RarezaCartaYGO.png")
+                    .toExternalForm(), TAMANO_ICONO, TAMANO_ICONO, true, true);
+
+        } catch (RuntimeException e) {
+            System.out.println("No se pudó cargar la imagen de la rareza de las cartas");
+        }
 
         listaDetalles.insertaFin(labelNombre);
         listaDetalles.insertaFin(labelAtributo);
@@ -61,24 +73,15 @@ public class DescripcionCarta extends VBox {
     }
 
     public void anadirNivelCarta(int rareza) {
-        // 1. Limpiar las imágenes de la carta anterior
         rarezaCarta.getChildren().clear();
+        if (iconoNivel == null) return;
 
         for (int i = 0; i < rareza; i++) {
-            try {
-                // 2. Usa la ruta correcta desde tu carpeta resources
-                Image imagen = new Image(getClass().getResource("/recursos/iconos/RarezaCartaYGO.png").toExternalForm());
-                ImageView icono = new ImageView(imagen);
-
-                icono.setFitHeight(32);
-                icono.setFitWidth(32);
-                icono.setPreserveRatio(true);
-
-                rarezaCarta.getChildren().add(icono);
-            } catch (RuntimeException e) {
-                System.out.println("No se pudo cargar la imagen de rareza.");
-                break;
-            }
+            ImageView icono = new ImageView(iconoNivel);
+            icono.setFitHeight(TAMANO_ICONO);
+            icono.setFitWidth(TAMANO_ICONO);
+            icono.setPreserveRatio(true);
+            rarezaCarta.getChildren().add(icono);
         }
     }
 
@@ -108,24 +111,21 @@ public class DescripcionCarta extends VBox {
 
     public VBox crearContenedor() {
         VBox contenedorDescripcion = new VBox(5);
-        contenedorDescripcion.setMaxWidth(Region.USE_PREF_SIZE);
+        contenedorDescripcion.setMaxWidth(Double.MAX_VALUE);
+        contenedorDescripcion.setMaxHeight(Double.MAX_VALUE);
+        VBox.setVgrow(contenedorDescripcion, Priority.ALWAYS);
         contenedorDescripcion.setAlignment(Pos.CENTER);
 
-        HBox primeraFila = new HBox();
+        HBox primeraFila = new HBox(12);
         primeraFila.setAlignment(Pos.CENTER);
         primeraFila.getChildren().addAll(labelRareza, labelNombre, labelAtributo);
 
-
-        HBox segundaFila = new HBox();
-        segundaFila.setAlignment(Pos.CENTER);
-        segundaFila.getChildren().addAll(rarezaCarta);
-
         HBox penultimaFila = new HBox(30);
         penultimaFila.setAlignment(Pos.CENTER);
-        penultimaFila.getChildren().addAll(labelAtaque, labelDefensa);
+        penultimaFila.getChildren().addAll(labelTipo, labelAtaque, labelDefensa);
 
         contenedorDescripcion.getChildren().addAll(
-                primeraFila, segundaFila, labelTipo, penultimaFila, descripcionCarta
+                primeraFila, rarezaCarta, penultimaFila, descripcionCarta
         );
         contenedorDescripcion.getStyleClass().add("descripcion");
 
@@ -141,6 +141,14 @@ public class DescripcionCarta extends VBox {
             label.setText(textoFinal);
             label.setVisible(true);
             label.setManaged(true); // Lo vuelve a incluir en el layout
+        }
+    }
+
+    public void meterEstilos() {
+        Label labelActual = listaDetalles.eliminaFin();
+        while (labelActual != null) {
+            labelActual.getStyleClass().add("label");
+            labelActual = listaDetalles.eliminaFin();
         }
     }
 }
