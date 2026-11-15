@@ -30,6 +30,7 @@ public class Controlador {
         }
         libreria = new LibreriaYGO(cartas);
         ventana = new VentanaLibreria(libreria.getActual());
+        ventana.getSeccionFiltros().cargarAtributos(libreria.getAtributosDisponibles());
         Scene escena = new Scene(ventana.getVentana(), 800, 600);
 
         ventana.getSeccionCartas().setOnClickCartaCentral(this::manejarClickCartaCentral);
@@ -102,26 +103,34 @@ public class Controlador {
     }
 
     public void manejarMostrarNiveles() {
-        // Por mientras serán todas las de nivel 1
-        libreria.mostrarPorNivel(1);
+        String nivel = ventana.getSeccionFiltros().getNivelSeleccionado();
+        if (nivel == null) return;
+        if (nivel.equalsIgnoreCase("N/A")) {
+            libreria.mostrarHechizosTrampas();
+        } else {
+            libreria.mostrarPorNivel(Integer.parseInt(nivel));
+        }
         actualizarCartas();
         actualizarDetalles();
     }
 
     public void manejarMostrarAtributos() {
-        libreria.mostrarPorAtributo("DARK");
+        String atributo = ventana.getSeccionFiltros().getAtributoSeleccionado();
+        if (atributo == null) return;
+
+        libreria.mostrarPorAtributo(atributo);
         actualizarCartas();
         actualizarDetalles();
     }
 
     public void manejarMostrarAtaque() {
-        libreria.mostrarPorAtaque(true);
+        libreria.mostrarPorAtaque(!ventana.getSeccionFiltros().isAtaqueAscendente());
         actualizarDetalles();
         actualizarCartas();
     }
 
     public void manejarMostrarDefensa() {
-        libreria.mostrarPorDefensa(true);
+        libreria.mostrarPorDefensa(!ventana.getSeccionFiltros().isDefensaAscendente());
         actualizarDetalles();
         actualizarCartas();
     }

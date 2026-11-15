@@ -26,9 +26,6 @@
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 24px;
-    -fx-padding: 0 12 0 0;
-    -fx-wrap-text: true;
-    -fx-text-alignment: center;
 }
 
 .scroll-descripcion, .scroll-descripcion > .viewport {
@@ -38,8 +35,10 @@
 .label {
     -fx-text-fill: white;
     -fx-font-size: 15px;
-    -fx-padding: 0 0 0 12;
-    -fx-wrap-text: true;
+}
+
+.label-descripcion {
+    -fx-font-size: 14px;
 }
 
 .scroll-pane {
@@ -47,9 +46,7 @@
 }
 
 .descripcion {
-    -fx-padding: 10 10 20 0;
+    -fx-padding: 10 12 12 12;
     -fx-background-color: #4d2569;
-    -fx-border-radius: 2;
-    -fx-border-width: 0;
     -fx-background-radius: 10px;
 }
