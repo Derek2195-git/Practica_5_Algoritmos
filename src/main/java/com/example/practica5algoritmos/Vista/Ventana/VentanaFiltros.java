@@ -123,10 +123,6 @@ public class VentanaFiltros {
         }
     }
 
-    public boolean ventanaEstaAbierta() {
-        return ventana != null && ventana.isShowing();
-    }
-
     public void crearVentana(Window ventanaPrincipal) {
         Scene escena = new Scene(contenedor);
         escena.getStylesheets().add(getClass().getResource("/recursos/estilos.css").toExternalForm());

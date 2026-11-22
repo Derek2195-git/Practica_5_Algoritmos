@@ -15,6 +15,10 @@ public class LibreriaYGO {
     private ListaDobleCircular<CartaYGO> listaActiva;
     private TipoVista tipoDeVista;
 
+    /**
+     * Metodo que se encarga de la lógica principal del Yu-Gi-Oh!
+     * @param cartas
+     */
     public LibreriaYGO(ArrayList<CartaYGO> cartas){
         ArrayList<CartaYGO> cartasOrdenadas = new ArrayList<>(cartas);
         Collections.sort(cartasOrdenadas);
@@ -33,7 +37,7 @@ public class LibreriaYGO {
             porNivel.computeIfAbsent(carta.getNivel(), k -> new ListaDobleCircular<>()).insertaFin(carta);
             porAtributo.computeIfAbsent(carta.getAtributo(), k -> new ListaDobleCircular<>()).insertaFin(carta);
             monstruosPorAtaque.add(carta);
-            if (carta.tieneDefensa()) monstruosPorDefensa.add(carta);   // los Link no tienen DEF
+            if (carta.tieneDefensa()) monstruosPorDefensa.add(carta);
         }
 
         Collections.sort(monstruosPorAtaque, CartaYGO::compararAtaque);

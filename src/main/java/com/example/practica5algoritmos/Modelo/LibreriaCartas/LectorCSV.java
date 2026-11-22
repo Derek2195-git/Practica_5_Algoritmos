@@ -10,6 +10,11 @@ public class LectorCSV {
                 rareza = 6, DESCRIPCION = 7, IMAGEN = 9;
     String ruta = "/recursos/cartas_yugioh.csv";
 
+    /**
+     * Constructor del gestor y manejador del archivo csv de cartas
+     * @return ArrayList con todas las cartas del archivo csv obtenidas
+     * @throws IOException Excepción de entrada y salida en caso de que no se encuentre el archivo
+     */
     public ArrayList<CartaYGO> leerCartas() throws IOException {
         ArrayList<String[]> filas = leerFilas();
         ArrayList<CartaYGO> cartas = new ArrayList<>();
@@ -28,6 +33,11 @@ public class LectorCSV {
         return cartas;
     }
 
+    /**
+     * Metodo que lee una fila del csv
+     * @return ArrayList de arreglos de tipo string que indican todas las filas del archivo csv
+     * @throws IOException Excepción de entrada y salida en caso de que no se encuentre el archivo
+     */
     private ArrayList<String[]> leerFilas() throws IOException {
         InputStream in = LectorCSV.class.getResourceAsStream(ruta);
         if (in == null) throw new IOException("No se encontró el recurso " + ruta);
@@ -46,6 +56,11 @@ public class LectorCSV {
         return filas;
     }
 
+    /**
+     * Metodo que lee una fila y la convierte a una carta
+     * @param c Fila a convertir
+     * @return Carta con los valores dados de la fila
+     */
     private CartaYGO filaACarta(String[] c) {
         return new CartaYGO(
                 c[NOMBRE].trim(),
@@ -60,6 +75,11 @@ public class LectorCSV {
         );
     }
 
+    /**
+     * Metodo que convierte un texto a un valor númerico, empleado para los atributos de nivel, ataque y defensa
+     * @param texto Cadena a convertir
+     * @return Valor entero que puede tomar el valor dado, o un -1 en caso de que dicho número no estuviera disponible
+     */
     private int convertirValoresNumericos(String texto) {
         String limpio = texto.trim();
         return limpio.equalsIgnoreCase("N/A") ?

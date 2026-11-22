@@ -13,9 +13,7 @@ public class SeccionDetalles {
         detallesCartaActual = new DescripcionCarta();
 
         contenedor = new VBox();
-
         contenedor.setAlignment(Pos.CENTER);
-
         contenedor.getChildren().addAll(detallesCartaActual.crearContenedor());
     }
 

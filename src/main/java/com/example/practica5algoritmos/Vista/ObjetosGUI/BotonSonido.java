@@ -41,6 +41,9 @@ public class BotonSonido extends ImageButton {
         cargarCancionActual();
     }
 
+    /**
+     * Carga la canción actual de la lista de reproducciones y la reproduce
+     */
     private void cargarCancionActual() {
         for (int i = rutasCanciones.getTamano(); i > 0; i--) {
             if (cargarMusica(rutasCanciones.peekActual())) {
@@ -54,6 +57,11 @@ public class BotonSonido extends ImageButton {
         setDisable(true);
     }
 
+    /**
+     * Carga una canción dada por una ruta al reproductor de música
+     * @param rutaMusica Ruta actual de la música
+     * @return booleano que indica si se cargó correctamente o no
+     */
     private boolean cargarMusica(String rutaMusica) {
         try {
             Media media = new Media(getClass().getResource(rutaMusica).toExternalForm());
@@ -74,27 +82,40 @@ public class BotonSonido extends ImageButton {
         }
     }
 
-    private void revisarFadeout(MediaPlayer jugador, Duration tiempoActual) {
+    /**
+     * Metodo que asigna un fadeout a la canción despues de cierto tiempo
+     * @param reproductorMusica Reproductor de música dado
+     * @param tiempoActual Tiempo actual de la canción
+     */
+    private void revisarFadeout(MediaPlayer reproductorMusica, Duration tiempoActual) {
         if (fadeout != null) return;   // ya está en curso
 
-        Duration total = jugador.getTotalDuration();
+        Duration total = reproductorMusica.getTotalDuration();
         if (total == null || total.isUnknown() || total.isIndefinite()) return;
         if (total.toSeconds() <= 3 * 2) return;
 
         double restante = total.subtract(tiempoActual).toSeconds();
         if (restante <= 3) {
-            bajarVolumenLentamente(jugador, restante);
+            bajarVolumenLentamente(reproductorMusica, restante);
         }
     }
 
-    public void bajarVolumenLentamente(MediaPlayer mediaPlayer, double duracion) {
+    /**
+     * Metodo que crea el fadeout para la canción
+     * @param reproductorMusica Reproductor de música
+     * @param duracion Duración del fadeout a asignar
+     */
+    public void bajarVolumenLentamente(MediaPlayer reproductorMusica, double duracion) {
         fadeout = new Timeline(
                 new KeyFrame(Duration.seconds(duracion),
-                        new KeyValue(mediaPlayer.volumeProperty(), 0))
+                        new KeyValue(reproductorMusica.volumeProperty(), 0))
         );
         fadeout.play();
     }
 
+    /**
+     * Metodo que detiene tanto el fadeout como la cabción
+     */
     public void liberarReproductor() {
         if (fadeout != null) {
             fadeout.stop();
@@ -107,12 +128,18 @@ public class BotonSonido extends ImageButton {
         }
     }
 
+    /**
+     * Metodo que carga la siguiente canción en la lista de reproducción
+     */
     public void siguienteCancion() {
         if (rutasCanciones == null || rutasCanciones.isEmpty()) return;
         rutasCanciones.avanzar();
         cargarCancionActual();
     }
 
+    /**
+     * Metodo que alterna el volumen de la canción actual
+     */
     public void alternar() {
         if (reproductor == null) return;
         if (sonando) {

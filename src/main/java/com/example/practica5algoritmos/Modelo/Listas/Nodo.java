@@ -3,10 +3,7 @@ package com.example.practica5algoritmos.Modelo.Listas;
 public class Nodo<T> {
     private T info;
     private Nodo<T> siguiente;
-    private Nodo<T> ant;
-
     public Nodo(T info) {
-        ant = null;
         this.info = info;
         siguiente = null;
     }
@@ -15,18 +12,8 @@ public class Nodo<T> {
         return info;
     }
 
-    public Nodo<T> getAnt() {
-        return ant;
-    }
-
-    public void setAnt(Nodo ant) { this.ant = ant; }
-
     public Nodo<T> getSiguiente() {
         return siguiente;
-    }
-
-    public void setInfo(T info) {
-        this.info = info;
     }
 
     public void setSiguiente(Nodo siguiente) {

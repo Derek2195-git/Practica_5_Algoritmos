@@ -27,6 +27,9 @@ public class DescripcionCarta extends VBox {
     private ListaCircular<Label> listaDetalles;
     private Image iconoNivel;
 
+    /**
+     * Constructor de la sección de detalles de la carta
+     */
     public DescripcionCarta() {
         listaDetalles = new ListaCircular<>();
         labelNombre = new Label();
@@ -72,11 +75,15 @@ public class DescripcionCarta extends VBox {
 
     }
 
-    public void anadirNivelCarta(int rareza) {
+    /**
+     * Metodo que añade imagenes que concuerdan con el tamaño de la carta
+     * @param nivel Nivel a gráficar de la carta
+     */
+    public void anadirNivelCarta(int nivel) {
         rarezaCarta.getChildren().clear();
         if (iconoNivel == null) return;
 
-        for (int i = 0; i < rareza; i++) {
+        for (int i = 0; i < nivel; i++) {
             ImageView icono = new ImageView(iconoNivel);
             icono.setFitHeight(TAMANO_ICONO);
             icono.setFitWidth(TAMANO_ICONO);
@@ -85,6 +92,17 @@ public class DescripcionCarta extends VBox {
         }
     }
 
+    /**
+     * Metodo que actualiza los detalles de la descripción de la carta
+     * @param nombre Nuevo nombre a mostrar
+     * @param atributo Nuevo atributo a mostrar
+     * @param nivel Nuevo nivel a mostrar
+     * @param tipo Nuevo tipo a mostrar
+     * @param ataque Nuevo ataque a mostrar
+     * @param defensa Nueva defensa a mostrar
+     * @param rareza Nueva rareza a mostrar
+     * @param descripcion Nueva descripcion a mostrar
+     */
     public void actualizarDetalles(String nombre, String atributo, int nivel, String tipo, String ataque,
                                    String defensa, String rareza, String descripcion) {
 
@@ -109,6 +127,10 @@ public class DescripcionCarta extends VBox {
         }
     }
 
+    /**
+     * Metodo que crea el contenedor usado para almacenar todos los detalles de la carta
+     * @return
+     */
     public VBox crearContenedor() {
         VBox contenedorDescripcion = new VBox(5);
         contenedorDescripcion.setMaxWidth(Double.MAX_VALUE);
@@ -133,6 +155,12 @@ public class DescripcionCarta extends VBox {
         return contenedorDescripcion;
     }
 
+    /**
+     * Metodo que muestra o esconde labels que se muestran como no disponibles o invalidos
+     * @param label Label a mostra
+     * @param valorOriginal Texto o valor original existente en el label
+     * @param textoFinal Texto o valores cambiados en el label, en caso de que se quiera añadir algún detalle extra
+     */
     private void configurarVisibilidadLabel(Label label, String valorOriginal, String textoFinal) {
         if (valorOriginal == null || valorOriginal.equals("N/A") || valorOriginal.equals("-1")) {
             label.setVisible(false);
@@ -141,14 +169,6 @@ public class DescripcionCarta extends VBox {
             label.setText(textoFinal);
             label.setVisible(true);
             label.setManaged(true); // Lo vuelve a incluir en el layout
-        }
-    }
-
-    public void meterEstilos() {
-        Label labelActual = listaDetalles.eliminaFin();
-        while (labelActual != null) {
-            labelActual.getStyleClass().add("label");
-            labelActual = listaDetalles.eliminaFin();
         }
     }
 }
